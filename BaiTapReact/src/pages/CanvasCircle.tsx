@@ -10,15 +10,15 @@ const CanvasCircle = () => {
     let animationFrameId: number;
 
     const animate = () => {
-      setSize((prev) => {
-        return prev >= 150 ? 0 : prev + 1;
-      });
-      animationFrameId = requestAnimationFrame(animate);
+      setTimeout(() => {
+        setSize((prev) => (prev >= 150 ? 0 : prev + 0.5)); 
+        animationFrameId = requestAnimationFrame(animate);
+      }, 16); 
     };
 
-    animationFrameId = requestAnimationFrame(animate); 
+    animationFrameId = requestAnimationFrame(animate);
 
-    return () => cancelAnimationFrame(animationFrameId); 
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   useEffect(() => {
@@ -26,7 +26,8 @@ const CanvasCircle = () => {
     const ctx = canvas?.getContext("2d");
 
     if (ctx && canvas) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "blue"; 
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.beginPath();
       ctx.arc(canvas.width / 2, canvas.height / 2, size / 2, 0, Math.PI * 2);
